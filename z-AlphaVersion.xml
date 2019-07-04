@@ -276,6 +276,9 @@
 				<!--COMMENT: Attackers sometimes hide themselves in the folders of drivers, be careful to only exclude what is clogging events-->
 			<CommandLine condition="is">C:\Windows\system32\igfxsrvc.exe -Embedding</CommandLine>
 			<ParentImage condition="is">C:\Program Files\Realtek\Audio\HDA\RtkAudioService64.exe</ParentImage> <!--Realtek:Driver: routine actions-->
+			<!--SECTION: Splunk-->
+			<Image condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</Image>
+			<ParentImage condition="is">C:\Program Files\SplunkUniversalForwarder\bin\splunkd.exe</ParentImage>
 		</ProcessCreate>
 	</RuleGroup>
 	
