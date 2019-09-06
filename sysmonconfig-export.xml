@@ -87,6 +87,9 @@
 			<Image condition="is">C:\Windows\System32\plasrv.exe</Image> <!--Microsoft:Windows: Performance Logs and Alerts DCOM Server-->
 			<Image condition="is">C:\Windows\System32\wifitask.exe</Image> <!--Microsoft:Windows: Wireless Background Task-->
 			<Image condition="is">C:\Program Files (x86)\Common Files\microsoft shared\ink\TabTip32.exe</Image> <!--Microsoft:Windows: Touch Keyboard and Handwriting Panel Helper-->
+			<Image condition="is">C:\Windows\System32\smartscreen.exe</Image> <!-- Microsoft:Windows: Smartscreen, checks malicious websites and files https://www.howtogeek.com/320711/what-is-smartscreen-and-why-is-it-running-on-my-pc/ -->
+			<Image condition="is">C:\Windows\System32\msfeedssync.exe</Image> <!-- Microsoft:Windows: Microsoft Feeds Synchronization https://superuser.com/questions/445995/msfeedssync-exe-what-does-it-do -->
+			<Image condition="is">C:\Windows\System32\RuntimeBroker.exe</Image> <!-- Microsoft:Windows: Runtime Broker https://www.howtogeek.com/268240/what-is-runtime-broker-and-why-is-it-running-on-my-pc/ -->
 			<Image condition="is">C:\Windows\System32\TokenBrokerCookies.exe</Image> <!--Microsoft:Windows: SSO sign-in assistant for MicrosoftOnline.com-->
 			<CommandLine condition="is">C:\windows\system32\wermgr.exe -queuereporting</CommandLine> <!--Microsoft:Windows:Windows error reporting/telemetry-->
 			<ParentCommandLine condition="is">C:\windows\system32\wermgr.exe -queuereporting</ParentCommandLine> <!--Microsoft:Windows:Windows error reporting/telemetry-->
@@ -147,6 +150,7 @@
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s CertPropSvc</CommandLine>
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s DsmSvc</CommandLine>
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s Gpsvc</CommandLine> <!--Microsoft:Windows:Network: Group Policy -->
+			<CommandLine condition="is">C:\Windows\System32\svchost.exe -k netsvcs -p -s NetSetupSvc</CommandLine> <!--Microsoft:Windows: Network Setup Service, manages the installation of network drivers -->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s ProfSvc</CommandLine> <!--Microsoft:Windows: Network services-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s SENS</CommandLine> <!--Microsoft:Windows: Network services-->
 			<CommandLine condition="is">C:\Windows\system32\svchost.exe -k netsvcs -s SessionEnv</CommandLine> <!--Microsoft:Windows: Network services-->
@@ -370,6 +374,9 @@
 			<DestinationHostname condition="end with">microsoft.com</DestinationHostname> <!--Microsoft:Update delivery-->
 			<DestinationHostname condition="end with">microsoft.com.akadns.net</DestinationHostname> <!--Microsoft:Update delivery-->
 			<DestinationHostname condition="end with">microsoft.com.nsatc.net</DestinationHostname> <!--Microsoft:Update delivery-->
+			<!--Section: Loopback Addresses-->
+			<DestinationIp condition="is">127.0.0.1</DestinationIp>
+			<DestinationIp condition="begin with">fe80:0:0:0</DestinationIp>
 		</NetworkConnect>
 
 	<!--SYSMON EVENT ID 4 : RESERVED FOR SYSMON STATUS MESSAGES-->
@@ -466,6 +473,7 @@
 			<TargetFilename condition="end with">.chm</TargetFilename>
 			<TargetFilename condition="end with">.cmd</TargetFilename> <!--Batch scripting: Batch scripts can also use the .cmd extension | Credit: @mmazanec -->
 			<TargetFilename condition="end with">.cmdline</TargetFilename> <!--Microsoft:dotNet: Executed by cvtres.exe-->
+			<TargetFilename condition="end with">.dmp</TargetFilename> <!--Process dumps [ (fr) http://blog.gentilkiwi.com/securite/mimikatz/minidump ] -->
 			<TargetFilename condition="end with">.docm</TargetFilename> <!--Microsoft:Office:Word: Macro-->
 			<TargetFilename condition="end with">.exe</TargetFilename> <!--Executable-->
 			<TargetFilename condition="end with">.jar</TargetFilename> <!--Java applets-->
@@ -610,7 +618,7 @@
 			<!--Credential providers-->
 			<TargetObject condition="begin with">HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Authentication\Credential Provider</TargetObject> <!--Wildcard, includes Credential Providers and Credential Provider Filters-->
 			<TargetObject condition="begin with">HKLM\SYSTEM\CurrentControlSet\Control\Lsa\</TargetObject> <!-- [ https://attack.mitre.org/wiki/Technique/T1131 ] [ https://attack.mitre.org/wiki/Technique/T1101 ] -->
-			<TargetObject condition="begin with">HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\SecurityProviders</TargetObject> <!--Microsoft:Windows: Changes to WDigest-UseLogonCredential for password scraping [ https://www.trustedsec.com/april-2015/dumping-wdigest-creds-with-meterpreter-mimikatzkiwi-in-windows-8-1/ ] -->
+			<TargetObject condition="begin with">HKLM\SYSTEM\CurrentControlSet\Control\SecurityProviders\</TargetObject> <!--Microsoft:Windows: Changes to WDigest-UseLogonCredential for password scraping [ https://www.trustedsec.com/april-2015/dumping-wdigest-creds-with-meterpreter-mimikatzkiwi-in-windows-8-1/ ] -->
 			<TargetObject condition="begin with">HKLM\SOFTWARE\Microsoft\Netsh</TargetObject> <!--Microsoft:Windows: Netsh helper DLL [ https://attack.mitre.org/wiki/Technique/T1128 ] -->
 			<!--Networking-->
 			<TargetObject condition="begin with">HKLM\SYSTEM\CurrentControlSet\Control\NetworkProvider\Order\</TargetObject> <!--Microsoft:Windows: Order of network providers that are checked to connect to destination [ https://www.malwarearchaeology.com/cheat-sheets ] -->
